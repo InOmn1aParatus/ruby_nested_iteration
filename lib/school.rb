@@ -14,4 +14,20 @@ class School
   def assign_to_group(student)
     student.group = @groups.sample
   end
+
+  def group_all_students
+    @courses.each do |course|
+      course.students.each do |student|
+        assign_to_group(student)
+      end
+    end
+  end
+
+  def names
+    @courses.flat_map do |course|
+      course.students.map do |student|
+        student.name
+      end
+    end.uniq
+  end
 end
